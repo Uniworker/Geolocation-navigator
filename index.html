@@ -1,7 +1,6 @@
 <!--
 TODO:
-1.Rewrite js geolocation with Jquery;
-2.Add alternative geolocation MaxMind;
+
 3.Output the address;
 4.Add route finder with map frame;
 5.Find closest object on the map by input.
@@ -9,44 +8,18 @@ TODO:
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Your geolocation</title>
+        <title>Geolocation</title>
         <meta charset="utf-8">
         <meta name="author" content="Marko Yatsyn">
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="//js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" ></script>
+        <script type="text/javascript" src="custom.js"></script>
     </head>
     <body>
-        <h1>Geolocation</h1>
-        <button id="find-me">Show my location</button><br>
-        <div id="geo-content"></div>
-        <a id="map-link" target="_blank"></a>
-        <script type="text/javascript">
-            function geoFindMe() {
-                const geoContent = document.querySelector('#geo-content');
-                const mapLink = document.querySelector('#map-link');
-
-                mapLink.href = '';
-                mapLink.textContent = '';
-
-                function success(position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-
-                    geoContent.textContent = '';
-                    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-                    mapLink.textContent = `Latitude: ${latitude}°, Longitude: ${longitude}°`;
-                }
-
-                function error() {
-                    geoContent.textContent = 'Unable to retrieve your location!';
-                }
-
-                if (!navigator.geolocation) {
-                    geoContent.textContent = 'Geolocation isn\'t supported!';
-                } else {
-                    geoContent.textContent = 'Locating...';
-                    navigator.geolocation.getCurrentPosition(success, error);
-                }
-            }
-            document.querySelector('#find-me').addEventListener('click', geoFindMe);
-        </script>
+        <h1>Your geolocation</h1>
+        <button id="find-me">Show my location</button>
     </body>
 </html>
